@@ -3,12 +3,44 @@
 
 function normalizeBase(input?: string): string {
   let v = (input || '').toString().trim();
-  if (!v) return 'http://localhost:8080/api/v1';
-  // If someone put just ":8080/api/v1" or "localhost:8080/api/v1", fix it
+  const isDev = import.meta.env.DEV || (typeof window !== 'undefined' && window.location.hostname === 'localhost');
+  
+  // In development, use relative path to leverage Vite proxy (avoids CORS)
+  if (!v) {
+    return isDev ? '/api/v1' : 'http://localhost:8080/api/v1';
+  }
+  
+  // If it's already a relative path, return it as-is
+  if (v.startsWith('/')) return v.replace(/\/$/, '');
+  
+  // In development, convert full URLs to relative paths to use Vite proxy
+  if (isDev) {
+    try {
+      // If it looks like a full URL, extract the path
+      if (/^https?:\/\//i.test(v)) {
+        const url = new URL(v);
+        return url.pathname || '/api/v1';
+      }
+      // If someone put just ":8080/api/v1" or "localhost:8080/api/v1", extract path
+      if (v.includes('/')) {
+        const match = v.match(/(\/.*)$/);
+        if (match) return match[1];
+      }
+    } catch {
+      // If URL parsing fails, fall back to relative path
+      return '/api/v1';
+    }
+  }
+  
+  // Production mode: normalize to full URL
   if (v.startsWith(':')) v = 'http://localhost' + v; // ":8080/..." -> http://localhost:8080/...
   if (!/^https?:\/\//i.test(v)) v = 'http://' + v; // prepend scheme if missing
-  try { new URL(v); } catch { return 'http://localhost:8080/api/v1'; }
-  return v.replace(/\/$/, '');
+  try { 
+    new URL(v);
+    return v.replace(/\/$/, '');
+  } catch { 
+    return isDev ? '/api/v1' : 'http://localhost:8080/api/v1';
+  }
 }
 
 export const API_BASE_URL = normalizeBase((import.meta as any).env?.VITE_API_BASE_URL);
@@ -63,7 +95,8 @@ export async function apiFetch<T = any>(path: string, init: RequestInit = {}): P
   const token = getAccessToken();
   if (token) headers.set('Authorization', `Bearer ${token}`);
 
-  const base = API_BASE_URL || (typeof window !== 'undefined' ? `${window.location.origin}/api/v1` : 'http://localhost:8080/api/v1');
+  // Use relative path in development to leverage Vite proxy, full URL in production
+  const base = API_BASE_URL || (typeof window !== 'undefined' ? '/api/v1' : 'http://localhost:8080/api/v1');
   const url = base.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
   const doFetch = () => fetch(url, {
     ...init,
