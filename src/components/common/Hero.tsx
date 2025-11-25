@@ -51,29 +51,30 @@ const css = `
 .hero-wrap { position: relative; height: calc(100vh - 64px); min-height: 520px; }
 .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: var(--hero-fit, cover); object-position: var(--hero-pos, center 50%); display: block; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.15) 100%); }
-.hero-inner { max-width: 860px; padding: 64px 16px; color: var(--color-text); }
+.hero-inner { max-width: 860px; padding: 64px 16px; color: var(--color-text); width: 100%; }
 .hero-badge { display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(13, 28, 52, 0.45); border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(3px); margin-bottom: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; }
 .hero-sub { color: var(--color-text); margin-top: 300px; max-width: 720px; font-size: 18px; opacity: 0.96; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
 .hero-actions { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
 
 @media (max-width: 900px) { 
-  .hero-wrap { height: calc(100vh - 56px); min-height: 480px; } 
+  .hero-wrap { height: auto; min-height: 600px; } 
   .hero-inner { padding: 48px 16px; } 
-  .hero-sub { margin-top: 250px; }
+  .hero-sub { margin-top: 200px; }
 }
 
 @media (max-width: 640px) { 
-  .hero-wrap { height: 70vh; min-height: 420px; }
+  .hero-wrap { min-height: 500px; }
   .hero-inner { padding: 36px 14px; } 
-  .hero-sub { font-size: 16px; margin-top: 180px; max-width: 100%; }
+  .hero-sub { font-size: 16px; margin-top: 220px; max-width: 100%; }
   .hero-actions { gap: 10px; }
 }
 
 @media (max-width: 480px) {
-  .hero-wrap { height: 65vh; min-height: 380px; }
-  .hero-inner { padding: 24px 12px; }
-  .hero-sub { font-size: 14px; margin-top: 120px; line-height: 1.5; }
-  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-wrap { height: auto; min-height: 100vh; }
+  .hero-inner { padding: 60px 16px 40px; }
+  .hero-sub { font-size: 15px; margin-top: 240px; line-height: 1.6; }
+  .hero-actions { flex-direction: column; width: 100%; gap: 12px; }
   .hero-actions > * { width: 100%; text-align: center; }
+  .hero-img { object-position: center 20% !important; }
 }
 `;
