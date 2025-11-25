@@ -212,11 +212,11 @@ export default function SinglePublic() {
               </div>
             </div>
 
-            <div className="card testing-video" data-animate="fade-up" style={{color:'#fff' }}>
+            <div className="card testing-video" data-animate="fade-up" style={{ color: '#fff' }}>
               <VideoGallery
                 items={[
-                  
-                  { src: "/videos/sample1.mp4", title: "NIJ Test A"  },
+
+                  { src: "/videos/sample1.mp4", title: "NIJ Test A" },
                   { src: "/videos/sample2.mp4", title: "Blast Test B" },
                 ]}
               />
@@ -343,8 +343,8 @@ export default function SinglePublic() {
           <div className="card card--soft legal-wrap" data-animate="fade-up">
             <LegalTabs />
           </div>
-          <div className="container center mt-24" data-animate="fade-up">
-            <CTAButton href="#contact" style={{marginTop:10, marginLeft: -60,}}>Request a Prototype</CTAButton>
+          <div className="container center mt-24" data-animate="fade-up" style={{ display: 'flex', justifyContent: 'center' }}>
+            <CTAButton href="#contact" style={{ marginTop: 10 }}>Request a Prototype</CTAButton>
           </div>
         </Section>
       </div>

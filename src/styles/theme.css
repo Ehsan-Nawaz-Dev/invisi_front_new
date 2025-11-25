@@ -1,24 +1,56 @@
 :root {
   /* Brand palette */
-  --color-bg: #00264D;            /* Deep navy */
-  --color-surface: #0b2f5a;        /* Slightly lighter navy for surfaces */
-  --color-elev: #113a70;           /* Elevated surface */
-  --color-border: #5E5E5E;         /* Tungsten gray */
-  --color-text: #C5C6C7;           /* Silver-gray */
-  --color-text-dim: #aeb0b2;       /* Dimmed text */
-  --color-primary: #1A73E8;        /* Metallic blue accent */
+  --color-bg: #00264D;
+  /* Deep navy */
+  --color-surface: #0b2f5a;
+  /* Slightly lighter navy for surfaces */
+  --color-elev: #113a70;
+  /* Elevated surface */
+  --color-border: #5E5E5E;
+  /* Tungsten gray */
+  --color-text: #C5C6C7;
+  /* Silver-gray */
+  --color-text-dim: #aeb0b2;
+  /* Dimmed text */
+  --color-primary: #1A73E8;
+  /* Metallic blue accent */
   --color-bg-gradient: linear-gradient(180deg, #0b1f3a 0%, #162a4b 60%, #0b1f3a 100%);
   /* Dark panel system (no cream) */
-  --color-panel: #0B121B;          /* Dark navy panel */
-  --color-panel-border: #1b2836;   /* Panel border */
-  --color-brand-red: #8E1E22;      /* Brand red top bar */
-  --color-gold: #D7A333;           /* Gold outline */
+  --color-panel: #0B121B;
+  /* Dark navy panel */
+  --color-panel-border: #1b2836;
+  /* Panel border */
+  --color-brand-red: #8E1E22;
+  /* Brand red top bar */
+  --color-gold: #D7A333;
+  /* Gold outline */
   --radius: 12px;
-  --shadow: 0 12px 30px rgba(0,0,0,0.35);
-  --shadow-soft: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* Responsive typography */
+  --font-size-h1: clamp(1.75rem, 4vw + 1rem, 3.2rem);
+  --font-size-h2: clamp(1.5rem, 3vw + 0.8rem, 2.5rem);
+  --font-size-h3: clamp(1.25rem, 2vw + 0.6rem, 1.875rem);
+  --font-size-h4: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
+  --font-size-base: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+  --font-size-small: clamp(0.75rem, 0.8vw + 0.4rem, 0.875rem);
+
+  /* Responsive spacing */
+  --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 1vw, 0.75rem);
+  --spacing-md: clamp(0.75rem, 1.5vw, 1rem);
+  --spacing-lg: clamp(1rem, 2vw, 1.5rem);
+  --spacing-xl: clamp(1.5rem, 3vw, 2rem);
+  --spacing-2xl: clamp(2rem, 4vw, 3rem);
 }
 
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
+
 body {
   margin: 0;
   background: var(--color-bg-gradient);
@@ -28,22 +60,55 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Montserrat', 'Open Sans', Arial, sans-serif;
   letter-spacing: 0.3px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+}
+
+body {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
 }
 
 .card {
   background: var(--color-panel);
   border: 1px solid var(--color-panel-border);
   border-radius: var(--radius);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
 }
 
-.header, .footer {
+.header,
+.footer {
   background: var(--color-bg-gradient);
 }
-.footer { border-top: 2px solid var(--color-gold); border-bottom: none; }
+
+.footer {
+  border-top: 2px solid var(--color-gold);
+  border-bottom: none;
+}
 
 .btn {
   display: inline-flex;
@@ -57,11 +122,18 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: transform .15s ease, filter .15s ease;
 }
-.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
 
 .nav a {
   color: var(--color-text);
   padding: 8px 10px;
   border-radius: 8px;
 }
-.nav a:hover { background: rgba(255,255,255,0.06); }
+
+.nav a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}

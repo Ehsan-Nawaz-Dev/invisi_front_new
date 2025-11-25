@@ -55,7 +55,7 @@ export default function ProductCarousel() {
         <h3>Product Highlights</h3>
         <div className="dots">
           {items.map((_, i) => (
-            <button key={i} onClick={() => setIndex(i)} aria-label={`Go to ${i+1}`} className={i===index? 'dot dot--active':'dot'} />
+            <button key={i} onClick={() => setIndex(i)} aria-label={`Go to ${i + 1}`} className={i === index ? 'dot dot--active' : 'dot'} />
           ))}
         </div>
       </div>
@@ -84,10 +84,11 @@ export default function ProductCarousel() {
 }
 
 const css = `
-.carousel-head { display: flex; justify-content: space-between; align-items: center; }
+.carousel-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 .carousel-head h3 { margin: 0; }
-.dots { display: flex; gap: 6px; }
-.dot { width: 10px; height: 10px; border-radius: 999px; border: none; background: rgba(255,255,255,0.25); cursor: pointer; }
+.dots { display: flex; gap: 8px; padding: 4px; }
+.dot { width: 12px; height: 12px; min-width: 12px; min-height: 12px; border-radius: 999px; border: none; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s ease; padding: 0; }
+.dot:hover { background: rgba(255,255,255,0.4); transform: scale(1.1); }
 .dot--active { background: var(--color-primary); }
 
 .slide { display: grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: center; }
@@ -98,19 +99,35 @@ const css = `
 .pill { padding: 6px 10px; border-radius: 999px; background: rgba(26,115,232,0.18); color: #cfe1ff; border: 1px solid rgba(26,115,232,0.35); font-size: 12px; }
 .actions { margin-top: 6px; }
 
-.slide__media { position: relative; width: 460px; height: 260px; border-radius: 12px; overflow: hidden; background: radial-gradient(800px 400px at 60% -20%, rgba(26,115,232,0.16), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border: 1px solid var(--line); display: grid; justify-self: end; }
+.slide__media { position: relative; width: 100%; max-width: 460px; height: 260px; border-radius: 12px; overflow: hidden; background: radial-gradient(800px 400px at 60% -20%, rgba(26,115,232,0.16), transparent 60%), linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border: 1px solid var(--line); display: grid; justify-self: end; }
 .slide-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
-@media (max-width: 900px) {
-  .slide { grid-template-columns: 1fr; }
-  .slide__media { width: 100%; height: 220px; justify-self: stretch; }
-}
-
 @media (max-width: 1200px) {
-  .slide__media { width: 400px; height: 240px; }
+  .slide__media { max-width: 400px; height: 240px; }
 }
 
 @media (max-width: 1024px) {
-  .slide__media { width: 360px; height: 220px; }
+  .slide__media { max-width: 360px; height: 220px; }
+}
+
+@media (max-width: 900px) {
+  .slide { grid-template-columns: 1fr; }
+  .slide__media { max-width: 100%; height: 240px; justify-self: stretch; }
+  .title { font-size: 20px; }
+}
+
+@media (max-width: 640px) {
+  .slide__media { height: 200px; }
+  .title { font-size: 18px; }
+  .blurb { font-size: 14px; }
+  .carousel-head h3 { font-size: 18px; }
+  .dots { gap: 6px; }
+  .dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; }
+}
+
+@media (max-width: 480px) {
+  .slide__media { height: 180px; }
+  .title { font-size: 16px; }
+  .pill { font-size: 11px; padding: 5px 8px; }
 }
 `;

@@ -56,6 +56,24 @@ const css = `
 .hero-sub { color: var(--color-text); margin-top: 300px; max-width: 720px; font-size: 18px; opacity: 0.96; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
 .hero-actions { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
 
-@media (max-width: 900px)  { .hero-wrap { height: calc(100vh - 56px); } .hero-inner { padding: 48px 16px; } }
-@media (max-width: 640px)  { .hero-inner { padding: 36px 14px; } .hero-sub { font-size: 16px; } }
+@media (max-width: 900px) { 
+  .hero-wrap { height: calc(100vh - 56px); min-height: 480px; } 
+  .hero-inner { padding: 48px 16px; } 
+  .hero-sub { margin-top: 250px; }
+}
+
+@media (max-width: 640px) { 
+  .hero-wrap { height: 70vh; min-height: 420px; }
+  .hero-inner { padding: 36px 14px; } 
+  .hero-sub { font-size: 16px; margin-top: 180px; max-width: 100%; }
+  .hero-actions { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+  .hero-wrap { height: 65vh; min-height: 380px; }
+  .hero-inner { padding: 24px 12px; }
+  .hero-sub { font-size: 14px; margin-top: 120px; line-height: 1.5; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions > * { width: 100%; text-align: center; }
+}
 `;

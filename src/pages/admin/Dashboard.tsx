@@ -8,8 +8,8 @@ function Badge({ status }: { status: string }) {
     status === "Won"
       ? "rgba(16,185,129,0.12)"
       : status === "Lost"
-      ? "rgba(239,68,68,0.12)"
-      : "rgba(245,158,11,0.12)";
+        ? "rgba(239,68,68,0.12)"
+        : "rgba(245,158,11,0.12)";
   return (
     <span
       style={{
@@ -86,7 +86,7 @@ export default function Dashboard() {
       try {
         const u = await adminMe();
         setUser(u);
-      } catch {}
+      } catch { }
       try {
         const stats = await adminApi.get("/admin/stats");
         const s = (stats as any)?.data || stats || {};
@@ -96,7 +96,7 @@ export default function Dashboard() {
           proto30d: Number(s.proto30d || 0),
           downloads30d: Number(s.downloads30d || 0),
         });
-      } catch {}
+      } catch { }
       try {
         const res = await adminApi.get("/dealers");
         const data = (res as any)?.data || res || [];
@@ -108,7 +108,7 @@ export default function Dashboard() {
             users: d.users || d.userCount || 0,
           }));
         setDealers(items);
-      } catch {}
+      } catch { }
       try {
         const res = await adminApi.get("/leads");
         const data = (res as any)?.data || res || [];
@@ -121,7 +121,7 @@ export default function Dashboard() {
             created: l.createdAt || l.created || "",
           }));
         setLeads(items);
-      } catch {}
+      } catch { }
     } catch (e: any) {
       setError(e?.message || "Failed");
     } finally {
@@ -145,7 +145,9 @@ export default function Dashboard() {
 
   return (
     <main style={{ display: "grid", gap: 16, padding: 16 }}>
+      <style>{responsiveCss}</style>
       <header
+        className="dashboard-header"
         style={{
           display: "flex",
           alignItems: "center",
@@ -161,10 +163,11 @@ export default function Dashboard() {
       </header>
 
       <div
+        className="kpi-grid"
         style={{
           display: "grid",
           gap: 12,
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
         }}
       >
         {loading ? (
@@ -214,6 +217,7 @@ export default function Dashboard() {
       </div>
 
       <div
+        className="panel"
         style={{
           background: "#0E1621",
           border: "1px solid #223",
@@ -249,6 +253,7 @@ export default function Dashboard() {
           {(dealers.length ? dealers : []).map((d) => (
             <div
               key={d.org + String(d.region)}
+              className="dealer-card"
               style={{
                 display: "flex",
                 justifyContent: "space-between",
@@ -303,6 +308,7 @@ export default function Dashboard() {
       </div>
 
       <div
+        className="panel"
         style={{
           background: "#0E1621",
           border: "1px solid #223",
@@ -334,13 +340,7 @@ export default function Dashboard() {
             View all
           </a>
         </div>
-        <div
-          style={{
-            border: "1px solid #223",
-            borderRadius: 10,
-            overflow: "auto",
-          }}
-        >
+        <div className="table-responsive">
           <table
             style={{ width: "100%", borderCollapse: "collapse", minWidth: 520 }}
           >
@@ -429,6 +429,7 @@ export default function Dashboard() {
       </div>
 
       <div
+        className="panel"
         style={{
           background: "#0E1621",
           border: "1px solid #223",
@@ -449,3 +450,80 @@ export default function Dashboard() {
     </main>
   );
 }
+
+const responsiveCss = `
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid #223;
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 12px !important;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+    gap: 10px !important;
+  }
+  
+  .panel {
+    padding: 12px !important;
+  }
+  
+  .dealer-card {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  
+  .dealer-card > div:first-child {
+    width: 100%;
+  }
+  
+  .dealer-card > a {
+    align-self: flex-end;
+  }
+  
+  .table-responsive table {
+    min-width: 480px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding: 10px !important;
+    gap: 12px !important;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  .kpi-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .table-responsive table {
+    min-width: 400px !important;
+    font-size: 13px;
+  }
+  
+  .table-responsive th,
+  .table-responsive td {
+    padding: 8px !important;
+  }
+}
+`;
