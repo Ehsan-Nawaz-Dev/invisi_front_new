@@ -254,9 +254,7 @@ export default function SinglePublic() {
             <div data-animate="fade-up">
               <DealerCTA />
             </div>
-            <div data-animate="fade-up">
-              <TrainingSchedulePreview />
-            </div>
+            
           </div>
         </Section>
       </div>
@@ -313,20 +311,20 @@ export default function SinglePublic() {
               <h4 className="side-title">Direct Contact</h4>
               <ul className="contact-list">
                 <li>
-                  <span>Sales</span>
+                  <span>Adress</span>
                   <a href="mailto:sales@invisishield.com">
-                    sales@invisishield.com
+                    PO Box 52, Detroit, ME 04929
                   </a>
                 </li>
                 <li>
                   <span>Support</span>
                   <a href="mailto:support@invisishield.com">
-                    support@invisishield.com
+                    info@invisishield.com
                   </a>
                 </li>
                 <li>
                   <span>Phone</span>
-                  <a href="tel:+10000000000">+1 (000) 000-0000</a>
+                  <a href="tel:+10000000000">207 947-1999</a>
                 </li>
               </ul>
               <div className="note">
@@ -343,9 +341,7 @@ export default function SinglePublic() {
           <div className="card card--soft legal-wrap" data-animate="fade-up">
             <LegalTabs />
           </div>
-          <div className="container center mt-24" data-animate="fade-up" style={{ display: 'flex', justifyContent: 'center' }}>
-            <CTAButton href="#contact" style={{ marginTop: 10 }}>Request a Prototype</CTAButton>
-          </div>
+         
         </Section>
       </div>
     </div>

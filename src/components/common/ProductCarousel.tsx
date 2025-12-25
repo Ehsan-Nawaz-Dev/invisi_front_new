@@ -71,9 +71,7 @@ export default function ProductCarousel() {
               ))}
             </div>
           )}
-          <div className="actions">
-            <CTAButton href={`/products/${current.slug}`} variant="ghost">View details</CTAButton>
-          </div>
+         
         </div>
         <div className="slide__media" aria-label="Product image area">
           <img className="slide-img" src={current.img} alt={current.name} />
